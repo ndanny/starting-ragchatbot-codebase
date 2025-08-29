@@ -3,7 +3,7 @@
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                FRONTEND                                     │
-│                              (script.js)                                   │
+│                              (script.js)                                    │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                               1. User Input
@@ -23,7 +23,7 @@
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                               BACKEND                                       │
-│                              (app.py)                                      │
+│                              (app.py)                                       │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                             2. FastAPI Endpoint
@@ -38,7 +38,7 @@
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            RAG SYSTEM                                       │
-│                          (rag_system.py)                                   │
+│                          (rag_system.py)                                    │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                             3. query() method
@@ -62,7 +62,7 @@
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           AI GENERATOR                                      │
-│                         (ai_generator.py)                                  │
+│                         (ai_generator.py)                                   │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                          4. generate_response()
@@ -132,7 +132,7 @@
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                              FRONTEND                                       │
-│                            (script.js)                                     │
+│                            (script.js)                                      │
 └─────────────────────────────────────────────────────────────────────────────┘
                                     │
                           6. Display response
@@ -160,10 +160,10 @@
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           KEY COMPONENTS                                    │
 │                                                                             │
-│ • Vector Store (ChromaDB): Semantic search of course materials             │
-│ • Session Manager: Maintains conversation context                          │
-│ • Document Processor: Chunks course content for retrieval                 │
-│ • Tool System: Claude can search when needed                              │
-│ • Sources Tracking: Shows which documents were referenced                  │
+│ • Vector Store (ChromaDB): Semantic search of course materials              │
+│ • Session Manager: Maintains conversation context                           │
+│ • Document Processor: Chunks course content for retrieval                   │
+│ • Tool System: Claude can search when needed                                │
+│ • Sources Tracking: Shows which documents were referenced                   │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
