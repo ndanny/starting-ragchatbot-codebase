@@ -12,6 +12,7 @@ dependencies = [
     "uvicorn==0.35.0",
     "python-multipart==0.0.20",
     "python-dotenv==1.1.1",
+    "pytest>=8.4.1",
 ]
 
 [dependency-groups]
@@ -21,7 +22,7 @@ dev = [
     "ruff>=0.12.11",
 ]
 
-[tool.uv.scripts]
+[project.scripts]
 format = "black ."
 format-check = "black --check ."
 lint = "ruff check ."
