@@ -36,6 +36,33 @@ uv remove <package>
 uv sync
 ```
 
+### Code Quality Tools
+```bash
+# Format code with Black
+uv run format
+
+# Check code formatting
+uv run format-check
+
+# Lint code with Ruff
+uv run lint
+
+# Auto-fix linting issues
+uv run lint-fix
+
+# Sort imports with isort
+uv run sort-imports
+
+# Check import sorting
+uv run sort-imports-check
+
+# Run all quality checks
+uv run quality-check
+
+# Auto-fix all quality issues
+uv run quality-fix
+```
+
 ### Access Points
 - Web Interface: http://localhost:8000
 - API Documentation: http://localhost:8000/docs
