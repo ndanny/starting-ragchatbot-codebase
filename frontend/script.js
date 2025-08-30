@@ -122,10 +122,30 @@ function addMessage(content, type, sources = null, isWelcome = false) {
     let html = `<div class="message-content">${displayContent}</div>`;
     
     if (sources && sources.length > 0) {
+        // Format sources as clickable links when available
+        const formattedSources = sources.map(source => {
+            if (typeof source === 'object' && source !== null) {
+                // Source object with potential link
+                if (source.text) {
+                    if (source.link) {
+                        return `<span class="source-item"><a href="${source.link}" target="_blank" style="color: inherit; text-decoration: none; padding: 4px 8px; background-color: rgba(255,255,255,0.1); border-radius: 4px; display: inline-block; margin: 2px; transition: background-color 0.2s; cursor: pointer;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'" onmouseout="this.style.backgroundColor='rgba(255,255,255,0.1)'">${source.text}</a></span>`;
+                    } else {
+                        return `<span class="source-item" style="padding: 4px 8px; background-color: rgba(255,255,255,0.05); border-radius: 4px; display: inline-block; margin: 2px;">${source.text}</span>`;
+                    }
+                } else {
+                    // Fallback for malformed objects
+                    return JSON.stringify(source);
+                }
+            } else {
+                // Backward compatibility: source is a plain string
+                return typeof source === 'string' ? `<span class="source-item" style="padding: 4px 8px; background-color: rgba(255,255,255,0.05); border-radius: 4px; display: inline-block; margin: 2px;">${source}</span>` : String(source);
+            }
+        }).join('');
+        
         html += `
             <details class="sources-collapsible">
                 <summary class="sources-header">Sources</summary>
-                <div class="sources-content">${sources.join(', ')}</div>
+                <div class="sources-content">${formattedSources}</div>
             </details>
         `;
     }
