@@ -601,46 +601,129 @@ details[open] .suggested-header::before {
     text-transform: none;
 }
 
-/* New Chat Button */
+/* New Chat Button - Magical Unicorn Rainbow Edition */
 .new-chat-button {
     width: 100%;
     padding: 1rem;
-    background: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
+    background: linear-gradient(45deg, 
+        #ff6b9d 0%, 
+        #ffc3a0 15%, 
+        #f093fb 30%, 
+        #f5576c 45%, 
+        #4facfe 60%, 
+        #00f2fe 75%, 
+        #43e97b 90%, 
+        #38f9d7 100%);
+    background-size: 300% 300%;
+    border: 2px solid transparent;
+    border-radius: 16px;
     color: white;
     font-size: 0.875rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
+    justify-content: flex-start;
+    gap: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px;
+    position: relative;
+    overflow: hidden;
+    animation: rainbow-shift 3s ease-in-out infinite;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 
+        0 4px 15px rgba(255, 107, 157, 0.3),
+        0 0 20px rgba(79, 172, 254, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    padding-left: 1.25rem;
+}
+
+.new-chat-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        transparent 50%, 
+        rgba(255, 255, 255, 0.3) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.new-chat-button::after {
+    content: '✨';
+    position: absolute;
+    top: 0.25rem;
+    right: 0.75rem;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes rainbow-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
 }
 
 .new-chat-button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px var(--focus-ring);
+    box-shadow: 
+        0 4px 15px rgba(255, 107, 157, 0.4),
+        0 0 25px rgba(79, 172, 254, 0.3),
+        0 0 0 3px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .new-chat-button:hover {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    transform: translateY(-2px) scale(1.02);
+    animation-duration: 1.5s;
+    box-shadow: 
+        0 6px 25px rgba(255, 107, 157, 0.4),
+        0 0 30px rgba(79, 172, 254, 0.3),
+        0 0 40px rgba(67, 233, 123, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.new-chat-button:hover::before {
+    opacity: 1;
+}
+
+.new-chat-button:hover::after {
+    animation-duration: 1s;
 }
 
 .new-chat-button:active {
-    transform: translateY(0);
+    transform: translateY(-1px) scale(1.01);
 }
 
 .plus-icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     line-height: 1;
+    background: linear-gradient(45deg, #ffffff 0%, #f0f9ff 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 /* Suggested Questions in Sidebar */
@@ -755,6 +838,14 @@ details[open] .suggested-header::before {
     .new-chat-button {
         padding: 0.875rem;
         font-size: 0.8rem;
+        padding-left: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .new-chat-button::after {
+        font-size: 1rem;
+        top: 0.2rem;
+        right: 0.5rem;
     }
     
     .plus-icon {
