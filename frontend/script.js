@@ -5,7 +5,7 @@ const API_URL = '/api';
 let currentSessionId = null;
 
 // DOM elements
-let chatMessages, chatInput, sendButton, totalCourses, courseTitles, newChatButton;
+let chatMessages, chatInput, sendButton, totalCourses, courseTitles, newChatButton, themeToggle;
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,8 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     totalCourses = document.getElementById('totalCourses');
     courseTitles = document.getElementById('courseTitles');
     newChatButton = document.getElementById('newChatButton');
+    themeToggle = document.getElementById('themeToggle');
     
     setupEventListeners();
+    initializeTheme();
     createNewSession();
     loadCourseStats();
 });
@@ -33,6 +35,8 @@ function setupEventListeners() {
     // New Chat button
     newChatButton.addEventListener('click', startNewChat);
     
+    // Theme toggle button
+    themeToggle.addEventListener('click', toggleTheme);
     
     // Suggested questions
     document.querySelectorAll('.suggested-item').forEach(button => {
@@ -221,4 +225,66 @@ async function loadCourseStats() {
             courseTitles.innerHTML = '<span class="error">Failed to load courses</span>';
         }
     }
+}
+
+// Theme Management Functions
+function initializeTheme() {
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Use saved theme if available, otherwise use system preference (defaulting to dark)
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'dark');
+    
+    if (initialTheme === 'light') {
+        document.documentElement.classList.add('light-theme');
+        updateThemeToggleAriaLabel('Switch to dark mode');
+    } else {
+        document.documentElement.classList.remove('light-theme');
+        updateThemeToggleAriaLabel('Switch to light mode');
+    }
+}
+
+function toggleTheme() {
+    const isLightTheme = document.documentElement.classList.contains('light-theme');
+    
+    if (isLightTheme) {
+        // Switch to dark theme
+        document.documentElement.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeToggleAriaLabel('Switch to light mode');
+        
+        // Announce theme change to screen readers
+        announceThemeChange('Dark mode enabled');
+    } else {
+        // Switch to light theme
+        document.documentElement.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeToggleAriaLabel('Switch to dark mode');
+        
+        // Announce theme change to screen readers
+        announceThemeChange('Light mode enabled');
+    }
+}
+
+function updateThemeToggleAriaLabel(label) {
+    if (themeToggle) {
+        themeToggle.setAttribute('aria-label', label);
+    }
+}
+
+function announceThemeChange(message) {
+    // Create a temporary element for screen reader announcement
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'sr-only';
+    announcement.textContent = message;
+    
+    document.body.appendChild(announcement);
+    
+    // Remove the announcement after a brief delay
+    setTimeout(() => {
+        document.body.removeChild(announcement);
+    }, 1000);
 }
