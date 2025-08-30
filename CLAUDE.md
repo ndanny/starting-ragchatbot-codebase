@@ -122,3 +122,4 @@ Expects course transcript files in `/docs/` folder. Files are processed for stru
 
 ### Error Handling
 The system includes comprehensive error handling for document processing, API failures, and vector store operations with graceful degradation.
+- don't suggest to run ./run.sh - i will manually run it myself
